@@ -1,0 +1,35 @@
+version: '3.7'
+
+volumes:
+  mysql_data:
+      driver: local
+
+services:
+
+  mariadb:
+    image: lscr.io/linuxserver/mariadb
+    container_name: mariadb
+    volumes:
+        - mysql_data:/var/lib/mysql
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - MYSQL_ROOT_PASSWORD=chiaradia
+      - TZ=Europe/London
+      - MYSQL_DATABASE=NOME_DB
+      - MYSQL_USER=chiaradia 
+      - MYSQL_PASSWORD=chiaradia
+    ports:
+      - 3306:3306
+    restart: unless-stopped
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: mariadb
+    ports:
+      - 8000:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mariadb
+    depends_on:
+      - mariadb
