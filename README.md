@@ -5,7 +5,7 @@
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+  <p align="center">CRUD Realizado com NestJS + MariaDB</p>
     <p align="center">
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
@@ -24,13 +24,27 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Este é um exemplo de um crud basico aplicando as seguintes tecnologias:
+
+1. NestJS (nodejs)
+2. MariaDB (banco de dados)
+3. Swagger (documentação da api)
+4. Docker
+5. Tratamento de Respostas de Sucesso e Erros
 
 ## Installation
 
+
+No terminal digite o comando abaixo para realizar a instalação:
 ```bash
 $ npm install
 ```
+
+Após a execução do comando acima execute o comando abaixo para levantar o Docker com o banco de dados MariaDB, a configuração do Docker você encontra no arquivo docker-compose.yml.
+```bash
+$ docker-compose up -d
+```
+
 
 ## Running the app
 
@@ -45,29 +59,54 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
+## Swagger para documentação da API
+
+A documentação da API se dá através do pacote do Swagger e sua configuração no arquivo main.ts e nos arquivos de controllers e entities.
+
+Para acessar a documentação deve-se acessar o link:
+[http://localhost:3000/api/](http://localhost:3000/api/)
+.
+
+.
+
+.
+
+## NestJS - CRUD Generator
+
+Para que o NestJS crie novos CRUD(s) já com a arquitetura de desenvolvimento padrão da paltaforma, basta executar o comando abaixo em seu terminal:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+$ nest g resource
 ```
 
-## Support
+Executando o comando acima, você deverá informar um nome para esse resource e automaticamente, o NestJS irá criar os controllers, modules, entities e services para a sua implementação.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+.
+
+.
+
+## Variaveis de ambiente
+
+
+Para o gerenciamento das variaiveis de ambiente, utilizamos o pacote:
+env-cmd
+
+Para instalar utilizamos o seguinte comando:
+```bash
+$ npm install env-cmd --save
+```
+
+Com este pacote instalado podemos ir em nosso arquivo package.json e informar qual arquivo de env cada ambiente irá utilizar.
+
+Veja os exemplos abaixo do arquivo package.json onde colocamos um arquivo de env para cada ambiente.
+```bash
+"start": "NODE_ENV=local env-cmd -f env/local.env nest start",
+"start:dev": "NODE_ENV=dev env-cmd -f env/dev.env nest start --watch",
+"start:debug": "NODE_ENV=debug nest start --debug --watch",
+"start:prod": "NODE_ENV=prod env-cmd -f env/prod.env  nest start --debug --watch",
+```
 
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+- Author - [Eduardo Chiaradia](http://www.chiaradia.com.br)
+- Website - [http://www.chiaradia.com.br](http://www.chiaradia.com.br)
